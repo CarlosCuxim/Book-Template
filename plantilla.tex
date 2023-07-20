@@ -1,20 +1,22 @@
-\documentclass[11pt]{article}
+\documentclass[draft]{qx-files/qx-book}
 
 
-
-% IDIOMA -----------------------------------------------------------------------
-\usepackage[spanish, mexico]{babel}
 
 % GRÁFICOS ---------------------------------------------------------------------
-\usepackage{geometry}
+%\usepackage{geometry}
 
 % MACROS -----------------------------------------------------------------------
-\usepackage{packages/qx-tools}
+%\usepackage{packages/qx-tools}
 
 % FUENTE -----------------------------------------------------------------------
-\usepackage{lmodern} % Se puede cambiar por la fuente con la que se sienta más a gusto
-\usepackage[T1]{fontenc}
+%\usepackage{lmodern} % Se puede cambiar por la fuente con la que se sienta más a gusto
+%\usepackage[T1]{fontenc}
 
+
+% TEMP ---------------------------------
+\usepackage{babel}
+\usepackage{lipsum}
+% TEMP ---------------------------------
 
 
 % OTROS ------------------------------------------------------------------------
@@ -26,53 +28,98 @@
 
 \begin{document}
 
+\frontmatter
+
+
 \maketitle
 
 
-\section{Entornos}
-
-Existen tres entornos definidos cada una con una versión alterna.
-
-\begin{exercise}
-  Entorno \verb|{exercise}|. Se autonumera.
-\end{exercise}
-
-\begin{exercise*}
-  Entorno \verb|{exercise*}|. Es un auxiliar de la caja anterior.
-\end{exercise*}
-
-Se puede cambiar el título de ``Ejercicio'' con el comando \verb|\SetExerciseTitle| en algún lugar del documento (antes de la caja). También se puede poner una numeración personalizada colocando un parámetro opcional (con corchetes), si se deja vacío no se numera. 
-
-
-\SetExerciseTitle{Problema}
-
-\begin{exercise}[(Numeración especial)]
-  Caja de ejercicios con numeración especial y \verb|\SetExerciseTitle{Problema}|.
-\end{exercise}
-
-\begin{exercise}[]
-  Caja de ejercicios con la numeración vacía y \verb|\SetExerciseTitle{Problema}|.
-\end{exercise}
 
 
 
-\begin{definition}[Texto opcional]
-  Entorno \verb|{definition}|. Se autonumera y se puede poner un texto opcional.
-\end{definition}
+\chapter{Prefacio}
 
-\begin{definition*}[Texto opcional]
-  Entorno \verb|{definition*}|. Sin numeración, también se puede poner un texto opcional.
-\end{definition*}
-
-\begin{lemma}[Texto opcional]
-  Entorno \verb|{lema}|. Se autonumera, esta creado con \verb|\newtheorem|.
-\end{lemma}
-
-\begin{lemma*}[Texto opcional]
-  Entorno \verb|{lema*}|. Sin numeración.
-\end{lemma*}
+\lipsum[1]
 
 
+
+
+\tableofcontents
+
+\mainmatter
+
+\part{Una de cal}
+
+
+\chapter[Álgebra conmutativa]{Algunos tópicos en álgebra conmutativa}
+\lipsum[2]
+\begin{equation}
+  x^2 + y^2 = 0
+\end{equation}
+
+\lipsum[1]
+
+\section{Las patatas}
+
+\lipsum[1]
+
+
+
+\lipsum[1]
+
+\section{Las uvas}
+
+\lipsum[1]
+
+\subsection{Las verdes}
+
+\lipsum[1]
+
+\chapter*{Sin nada voy a hacer esta wea muy larga para ver como se comporta esta wea}
+
+\subsection{Las rojas}
+
+\lipsum[1]
+
+\section{Una vía de doble visión}
+
+\lipsum
+
+\chapter[Título largo]{Título innecesariamente largo para probar como se comporta en esta wea}
+\lipsum
+
+
+\part{Dos de arena}
+
+\chapter{Tres}
+\lipsum
+
+
+\chapter{Cuatro}
+\lipsum[1]
+
+\appendix
+
+\chapter{Apéndice primero}
+
+
+\lipsum[1]
+
+\chapter{Apéndice segundo}
+
+
+\lipsum[1]
+
+\chapter{Apéndice tercero}
+
+
+\lipsum[1]
+
+\backmatter
+
+\chapter{Bibliografía}
+
+\lipsum
 
 \end{document}
 
