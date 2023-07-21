@@ -10,9 +10,14 @@
 %
 % ==============================================================================
 
-\RequirePackage{qx/boxes}
-\RequirePackage{qx/math}
-\RequirePackage{qx/delimiters}
+\DeclareOption*{%
+  \PassOptionsToPackage{\CurrentOption}{qx-files/qx-boxes}%
+}
+\ProcessOptions\relax
+
+\RequirePackage{qx-files/qx-boxes}
+\RequirePackage{qx-files/qx-math}
+\RequirePackageWithOptions{qx-files/qx-delimiters}
 
 
 
