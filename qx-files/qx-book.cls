@@ -25,10 +25,8 @@
 % ENTRADAS AUXILIARES ----------------------------------------------------------
 
 % Subtítulo
-\let\@subtitle=\relax
 \DeclareRobustCommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 % Publisher
-\let\@publisher=\relax
 \DeclareRobustCommand*{\publisher}[1]{\gdef\@publisher{#1}}
 
 
@@ -64,10 +62,14 @@
   \end{minipage}\par
     \vskip1in% Título
   {\color{white}\bfseries\fontsize{60}{60}\selectfont\@title\par}%
-    \vskip20\p@% Subtítulo
-  {\color{SecondaryCover}\fontsize{30}{36}\selectfont\@subtitle\par}%
+  \ifdefined\@subtitle% Revisa si se usó \subtitle
+      \vskip20\p@% Subtítulo
+    {\color{SecondaryCover}\fontsize{30}{36}\selectfont\@subtitle\par}%
+  \fi
+  \ifdefined\@publisher% Revisa si se usó \publisher
     \vfill% Publisher
   {\color{white}\Huge\@publisher\par}%
+  \fi
 }
 
 % Definición de la cubierta
@@ -97,7 +99,7 @@
     \vskip 60\p@
     \begin{center}%
       {\Huge\bfseries\@title\par}% Título
-      \ifx\@subtitle\relax% Revisa si \@subtitle está vacío
+      \ifdefined\@subtitle% Revisa si \@subtitle está vacío
           \vskip 2em%
         {\LARGE\@subtitle\par}% Subtítulo
       \fi
@@ -108,7 +110,7 @@
           \@author
         \end{tabular}\par}
         \vfil
-      \ifx\@publihser\relax
+      \ifdefined\@publisher% Revisa si \@publisher está vacío
         {\large\@publisher\par}% Publisher
           \vskip 1.5em%
       \fi
@@ -206,12 +208,16 @@
   }}
 
 
+
 % Sección de ejercicios --------------------------------------------------------
 
 \newcommand\ExerciseSection{%
   \section*{Ejercicios}%
   \addcontentsline{toc}{subsection}{Ejercicios}%
 }
+
+\newenvironment{ExerciseList}{\begin{enumerate}}{\end{enumerate}}
+
 
 
 \endinput
