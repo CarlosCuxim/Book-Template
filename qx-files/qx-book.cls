@@ -39,7 +39,7 @@
 \colorlet{SecondaryCover}{SecondaryColor}
 
 % Definición de el fondo de la cubierta
-\def\Qx@PrintBackBookCover{%
+\newcommand\Qx@PrintBackBookCover{%
 \begin{tikzpicture}[remember picture, overlay]
   \fill[MainCover]
     (current page.north west) rectangle (current page.south east);
@@ -53,7 +53,7 @@
 }
 
 % Definición del texto de la cubierta
-\def\Qx@PrintBookCover{% Autores
+\newcommand\Qx@PrintBookCover{% Autores
   \begin{minipage}[b][2in][b]{\textwidth}%
     \color{MainCover}\Huge
     \begin{tabular}[b]{l}%
@@ -69,7 +69,7 @@
 }
 
 % Definición de la cubierta
-\def\MakeBookCover{%
+\newcommand\MakeBookCover{%
   \pagestyle{empty}% La numeración se suprime
   \newgeometry{left=1.5in, right=1in, top=0.5in, bottom=1in}% Cambio de los márgenes
   \begin{titlepage}% Se inicia el titlepage
@@ -85,31 +85,70 @@
 }
 
 % CAMBIO DEL COMANDO \maketitle ------------------------------------------------
-\let\oldmaketitle=\maketitle% Se guarda el comando anterior
-\def\maketitle{{%
-  \let\old@title=\@title% Se guarda el comando anterior
-  \let\old@date=\@date
-  \def\@title{% Se hace el título más grande, en negritas y se agrega el subtítulo
-    {\Huge\bfseries\old@title\par}% Se imprime el título
-    \vskip10\p@
-    \@subtitle\par% Se imprime el subtítulo
-    \vfil
-    }%
-  \def\@date{% Se agrega el publisher antes de la fecha y se coloca al final
-    \vfil
-    \@publisher\par
-    \vskip10\p@
-    \old@date%
-  }%
-  \oldmaketitle% Se imprime el título
-}}
+\let\oldmaketitle=\maketitle% Se guarda el comando anterior por si algo
+\renewcommand\maketitle{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \null\vfil
+    \vskip 60\p@
+    \begin{center}%
+      {\Huge\bfseries\@title\par}% Título
+        \vskip 2em%
+      {\LARGE\@subtitle\par}% Subtítulo
+        \vfil
+      {\large% Autores
+      \lineskip .75em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}
+        \vfil
+      {\large\@publisher\par}% Publisher
+        \vskip 1.5em%
+      {\large\@date\par}% Fecha
+    \end{center}\par
+    \@thanks
+    \vfil\null
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+
+% CAMBIO DEL COMANDO \part -----------------------------------------------------
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{empty}% Se elimina la numeración
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+
 
 % CAMBIO DE FORMATO DE CAPÍTULO ------------------------------------------------
 
 % Medidas adicionales
 \newlength{\ChapSqSize}
 % Colores adicionales
-\colorlet{ChapSqSize}{MainColor}
+\colorlet{ChapSqSize}{blue!50!black}
 
 % Definición del formato de cabecera de capítulo numerado
 \newcommand\QxChapterHead[1]{%
@@ -159,5 +198,14 @@
     \QxsChapterHead{#1}
     \vskip 40\p@ plus 5\p@ minus 5\p@
   }}
+
+
+% Sección de ejercicios --------------------------------------------------------
+
+\newcommand\ExerciseSection{%
+  \section*{Ejercicios}%
+  \addcontentsline{toc}{subsection}{Ejercicios}%
+}
+
 
 \endinput
