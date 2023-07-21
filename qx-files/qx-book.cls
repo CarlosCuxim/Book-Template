@@ -22,12 +22,14 @@
 \colorlet{SecondaryColor}{yellow!80!red}
 
 
+
 % ENTRADAS AUXILIARES ----------------------------------------------------------
 
 % Subtítulo
 \DeclareRobustCommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 % Publisher
 \DeclareRobustCommand*{\publisher}[1]{\gdef\@publisher{#1}}
+
 
 
 % PORTADA DEL LIBRO ------------------------------------------------------------
@@ -88,6 +90,8 @@
   \pagestyle{headings}% Se reanuda la numeración
 }
 
+
+
 % CAMBIO DEL COMANDO \maketitle ------------------------------------------------
 \let\oldmaketitle=\maketitle% Se guarda el comando anterior por si algo
 \renewcommand\maketitle{%
@@ -133,6 +137,7 @@
 }
 
 
+
 % CAMBIO DEL COMANDO \part -----------------------------------------------------
 \renewcommand\part{%
   \if@openright
@@ -149,6 +154,7 @@
   \fi
   \null\vfil
   \secdef\@part\@spart}
+
 
 
 % CAMBIO DE FORMATO DE CAPÍTULO ------------------------------------------------
