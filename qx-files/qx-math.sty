@@ -27,12 +27,24 @@
 \DeclareMathOperator{\varRe}{Re}
 \DeclareMathOperator{\varIm}{Im}
 
+% Función para crear operadores cuyo nombre es el mismo que el del comando
+\def\qx@makeoperators#1{%
+  \@for\@Li:=#1\do{%
+    \ifcsname\@Li\endcsname
+      \PackageError{qx-math}{Comando existente}{El comando \expandafter\string\csname\@Li\endcsname\space ya existe, por favor definirlo manualmente}%
+    \else
+      \expandafter\protected@edef\csname\@Li\endcsname{\operatorname{\@Li}}%
+    \fi
+  }}
+
+\qx@makeoperators{mcm,mcd,grado}
+
 
 
 % OPERADORES BINARIOS ----------------------------------------------------------
 
 % Producto interno
-\newcommand*{\bcdot}{\boldsymbol\cdot}
+\newcommand\bcdot{\boldsymbol\cdot}
 
 
 
@@ -43,15 +55,14 @@
 % para los comandos y finalmente el conjunto de letras al que se aplicará en
 % formato de una lista separada por comas. Dará un error si el comando ya está
 % definido
-\def\qx@makelettercs#1#2#3{%
+\newcommand\qx@makelettercs[3]{%
   \@for\@Li:=#3\do{%
-    \ifcsname#2\@Li\endcsname%
+    \ifcsname#2\@Li\endcsname
       \PackageError{qx-math}{Comando existente}{El comando \expandafter\string\csname#2\@Li\endcsname\space ya existe, por favor definirlo manualmente}%
-    \else%
+    \else
       \expandafter\protected@edef\csname#2\@Li\endcsname{#1\@Li}%
-    \fi%
-  }%
-}
+    \fi
+  }}
 
 % Letras dobles
 \qx@makelettercs{\mathbb}{}{N,Z,Q,R,C}
@@ -69,20 +80,24 @@
 % GESTION DE ECUACIONES --------------------------------------------------------
 
 % Agrega la numeración aunque el entorno no lo incluya
-\newcommand*{\tagthis}{\refstepcounter{equation}\tag{\theequation}}
+\newcommand\tagthis{\refstepcounter{equation}\tag{\theequation}}
 
 % Conectores de ecuaciones "y" y "o"
-\newcommand*{\Eqand}{\qquad\text{y}\qquad}
-\newcommand*{\eqand}{\quad\text{y}\quad}
-\newcommand*{\Eqor}{\qquad\text{o}\qquad}
-\newcommand*{\eqor}{\quad\text{o}\quad}
+\newcommand\Eqand{\qquad\text{y}\qquad}
+\newcommand\eqand{\quad\text{y}\quad}
+\newcommand\Eqor{\qquad\text{o}\qquad}
+\newcommand\eqor{\quad\text{o}\quad}
 
 
 
 % INTERCAMBIO DE COMANDOS ------------------------------------------------------
 
 % Comando para intercambiar el valor de dos comandos
-\def\qx@SwapCommands#1#2{\let\qxAux=#1\let#1=#2\let#2=\qxAux}
+\newcommand\qx@SwapCommands[2]{%
+  \let\qxAux=#1%
+  \let#1=#2%
+  \let#2=\qxAux
+}
 
 \qx@SwapCommands\epsilon\varepsilon
 \qx@SwapCommands\Re\varRe
@@ -92,8 +107,8 @@
 
 % FUNCIONES AUXILIARES ---------------------------------------------------------
 
-\newcommand*{\ds}{\displaystyle}
-\newcommand*{\bec}{\mathbf}
+\newcommand\ds{\displaystyle}
+\newcommand\bec{\mathbf}
 
 
 
