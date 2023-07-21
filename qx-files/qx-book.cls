@@ -25,8 +25,10 @@
 % ENTRADAS AUXILIARES ----------------------------------------------------------
 
 % Subtítulo
+\let\@subtitle=\relax
 \DeclareRobustCommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 % Publisher
+\let\@publisher=\relax
 \DeclareRobustCommand*{\publisher}[1]{\gdef\@publisher{#1}}
 
 
@@ -95,8 +97,10 @@
     \vskip 60\p@
     \begin{center}%
       {\Huge\bfseries\@title\par}% Título
-        \vskip 2em%
-      {\LARGE\@subtitle\par}% Subtítulo
+      \ifx\@subtitle\relax% Revisa si \@subtitle está vacío
+          \vskip 2em%
+        {\LARGE\@subtitle\par}% Subtítulo
+      \fi
         \vfil
       {\large% Autores
       \lineskip .75em%
@@ -104,8 +108,10 @@
           \@author
         \end{tabular}\par}
         \vfil
-      {\large\@publisher\par}% Publisher
-        \vskip 1.5em%
+      \ifx\@publihser\relax
+        {\large\@publisher\par}% Publisher
+          \vskip 1.5em%
+      \fi
       {\large\@date\par}% Fecha
     \end{center}\par
     \@thanks
