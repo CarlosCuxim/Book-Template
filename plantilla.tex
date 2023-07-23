@@ -16,12 +16,14 @@
 
 
 
+
 % INFORMACIÓN ------------------------------------------------------------------
 \title{Plantilla}
 \author{Autor 1 \and Autor 2 \and Autor 3}
 \date{\today}
 \subtitle{Para libros very nice}
 \publisher{Editorial qxim}
+
 
 
 \begin{document}
@@ -37,7 +39,7 @@
 
 
 
-\chapter{Preface}
+\chapter*{Preface}
 
 \lipsum[1]
 
@@ -46,13 +48,22 @@
 
 \tableofcontents
 
+\chapter{Preliminar 1}
+\lipsum
+
+\chapter{Preliminar 3}
+\lipsum
+
+\chapter{Preliminar 2}
+\lipsum
+
 \mainmatter
 
 \part{One of chalk}
 
 
 \chapter[Álgebra conmutativa]{Some topics on commutative algebra}
-\lipsum[2]
+\lipsum[1-20]
 \begin{equation}
   x^2 + y^2 = 0
 \end{equation}
